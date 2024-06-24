@@ -13,24 +13,50 @@ class Solution{
     {
         //Your code here
         //return vector with correct order of elements
-        set<int>set;
-        for(int i=0; i<n; i++)
+        vector<int>ans; //stores the union
+        int j=0; // to traverse arr2
+        int i=0; // to traverse arr1
+        while(i<n && j<m)
         {
-            set.insert(arr1[i]);
+            if(arr1[i]<arr2[j])
+            {
+                if(ans.size()==0 || ans.back()!=arr1[i])
+                {
+                    ans.push_back(arr1[i]);
+                }
+                i++;
+            }
+            else
+            {
+                if(ans.size()==0 || ans.back()!=arr2[j])
+                {
+                    ans.push_back(arr2[j]);
+                }
+                j++;
+            }
         }
-        for(int i=0;i<m; i++)
+         while(i < n)
         {
-            set.insert(arr2[i]);
+           if(ans.size() == 0 || ans.back() != arr1[i])
+                {
+                    ans.push_back(arr1[i]);
+                }
+                i++;   
         }
-        vector<int>u;
-        for(auto it: set)
+   
+     while(j < m)
         {
-            u.push_back(it);
+            if(ans.size() == 0 || ans.back() != arr2[j])
+                {
+                    ans.push_back(arr2[j]);
+                }
+                j++;
         }
-        return u;
+        return ans;
     }
+        
 };
-//time complexity:-O((m+m)log(m+n))
+//time complexity:-O((m+m)
 //space complexity:-(O(M+n))
 
 //{ Driver Code Starts.
