@@ -9,9 +9,9 @@ class Solution{
     int lenOfLongSubarr(int A[],  int N, int K) 
     { 
         // Complete the function
-        unordered_map<int,int>prefixSum;
-        int sum=0;
+        unordered_map<int,int>preSum;
         int maxLen=0;
+        int sum=0;
         for(int i=0; i<N; i++)
         {
             sum+=A[i];
@@ -20,13 +20,14 @@ class Solution{
                 maxLen=max(maxLen,i+1);
             }
             int rem=sum-K;
-            if(prefixSum.find(rem)!=prefixSum.end())
+            if(preSum.find(rem)!=preSum.end())
             {
-                maxLen=max(maxLen,i-prefixSum[rem]);
+                int len=i-preSum[rem];
+                maxLen=max(maxLen,len);
             }
-            if(prefixSum.find(sum)==prefixSum.end())
+            if(preSum.find(sum)==preSum.end())
             {
-                prefixSum[sum]=i;
+                preSum[sum]=i;
             }
         }
         return maxLen;
