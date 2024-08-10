@@ -78,7 +78,7 @@ class Solution
     void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
     {
         // Your code goes here
-        if(root==NULL) return;
+        
         pre =findPre(root,key);
         suc=findSuc(root,key);
         return;
