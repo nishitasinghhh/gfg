@@ -13,22 +13,14 @@ class Solution
     vector <int> calculateSpan(int price[], int n)
     {
        // Your code here
-       vector<int>ans(n,1);
+       vector<int>ans(n);
        stack<int>st;
-       
-       for(int i=n-1; i>=0; i--)
+       for(int i=0; i<n; i++)
        {
-           while(!st.empty() && price[st.top()]<price[i])
-           {
-               ans[st.top()]=st.top()-i;
-               st.pop();
-           }
-           st.push(i);
-       }
-       while(!st.empty())
-       {
-           ans[st.top()]=st.top()+1;
+           while(!st.empty() && price[st.top()]<=price[i])
            st.pop();
+           ans[i]=st.empty()?i+1:(i-st.top());
+           st.push(i);
        }
        return ans;
     }
