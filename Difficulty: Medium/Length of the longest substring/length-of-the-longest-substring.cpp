@@ -6,25 +6,24 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    int longestUniqueSubsttr(string S){
+    int longestUniqueSubsttr(string s){
         //code
         vector<bool>count(256,0);
         int first=0;
         int second=0;
         int len=0;
-        while(second<S.length())
+        while(second<s.size())
         {
-            while(count[S[second]])
+            while(count[s[second]])
             {
-                count[S[first]]=0;
+                count[s[first]]=0;
                 first++;
             }
-            count[S[second]]=1;
+            count[s[second]]=1;
             len=max(len,second-first+1);
             second++;
         }
         return len;
-        
     }
 };
 
