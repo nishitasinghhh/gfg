@@ -13,51 +13,47 @@ class Solution{
     {
         //Your code here
         //return vector with correct order of elements
-        vector<int>ans; //stores the union
-        int j=0; // to traverse arr2
-        int i=0; // to traverse arr1
+        int i=0;
+        int j=0;
+        vector<int>unionn;
         while(i<n && j<m)
         {
-            if(arr1[i]<arr2[j])
+            if(arr1[i]<=arr2[j])
             {
-                if(ans.size()==0 || ans.back()!=arr1[i])
+                if(unionn.size()==0 || unionn.back()!=arr1[i])
                 {
-                    ans.push_back(arr1[i]);
+                    unionn.push_back(arr1[i]);
                 }
                 i++;
             }
             else
             {
-                if(ans.size()==0 || ans.back()!=arr2[j])
+                if(unionn.size()==0 || unionn.back()!=arr2[j] )
                 {
-                    ans.push_back(arr2[j]);
+                    unionn.push_back(arr2[j]);
                 }
                 j++;
             }
         }
-         while(i < n)
+        while(i<n)
         {
-           if(ans.size() == 0 || ans.back() != arr1[i])
+            if(unionn.size()==0 || unionn.back()!=arr1[i])
                 {
-                    ans.push_back(arr1[i]);
+                    unionn.push_back(arr1[i]);
                 }
-                i++;   
+                i++;
         }
-   
-     while(j < m)
+        while(j<m)
         {
-            if(ans.size() == 0 || ans.back() != arr2[j])
+            if(unionn.size()==0 || unionn.back()!=arr2[j] )
                 {
-                    ans.push_back(arr2[j]);
+                    unionn.push_back(arr2[j]);
                 }
                 j++;
         }
-        return ans;
+        return unionn;
     }
-        
 };
-//time complexity:-O((m+m)
-//space complexity:-(O(M+n))
 
 //{ Driver Code Starts.
 
