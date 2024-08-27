@@ -43,20 +43,40 @@ class Solution {
         // code here
         if(head1==NULL) return head2;
         if(head2==NULL) return head1;
-        if(head1->data>head2->data) swap(head1,head2);
-        Node* res=head1;
-        while(head1!=NULL && head2!=NULL)
+        Node* t1=head1;
+        Node* t2=head2;
+        Node* dummy=new Node(-1);
+        Node* temp=dummy;
+        while(t1!=NULL && t2!=NULL)
         {
-            Node* temp=NULL;
-            while(head1!=NULL && head1->data<=head2->data)
+            if(t1->data<t2->data)
             {
-                temp=head1;
-                head1=head1->next;
+                temp->next=t1;
+                temp=t1;
+                t1=t1->next;
             }
-            temp->next=head2;
-            swap(head1,head2);
+            else
+            {
+                temp->next=t2;
+                temp=t2;
+                t2=t2->next;
+            }
         }
-        return res;
+        while(t1)
+        {
+            temp->next=t1;
+                temp=t1;
+                t1=t1->next;
+        }
+        while(t2)
+        {
+            temp->next=t2;
+                temp=t2;
+                t2=t2->next;
+            
+        }
+        return dummy->next;
+        
         
     }
 };
