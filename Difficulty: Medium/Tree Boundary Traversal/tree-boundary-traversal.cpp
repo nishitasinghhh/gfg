@@ -105,13 +105,7 @@ struct Node
 
 class Solution {
 public:
-bool isLeaf(Node* node)
-{
-    if(node->left==NULL && node->right==NULL)
-    return true;
-    return false;
-}
-void leftBoundary(Node* root, vector<int> &ans)
+void leftBoun(Node* root, vector<int> &ans)
 {
     Node* cur=root->left;
     while(cur)
@@ -121,42 +115,49 @@ void leftBoundary(Node* root, vector<int> &ans)
         else cur=cur->right;
     }
 }
-void rightBoundary(Node* root, vector<int> &ans)
-{
-    Node* cur=root->right;
-    stack<Node*>st;
-    while(cur)
-    {
-        if(!isLeaf(cur)) st.push(cur);
-        if(cur->right) cur=cur->right;
-        else cur=cur->left;
-    }
-    while(!st.empty())
-    {
-        ans.push_back(st.top()->data);
-        st.pop();
-        }
-}
-void leafNode(Node* root, vector<int> &ans)
+void leaf(Node* root, vector<int> &ans)
 {
     if(isLeaf(root))
     {
         ans.push_back(root->data);
         return;
+        
     }
-    if(root->left) leafNode(root->left,ans);
-    if(root->right) leafNode(root->right,ans);
+    if(root->left) leaf(root->left,ans);
+    if(root->right) leaf(root->right,ans);
+}
+void rightBoun(Node* root, vector<int> &ans)
+{
+    Node* cur=root->right;
+    stack<int>st;
+    while(cur)
+    {
+        if(!isLeaf(cur)) st.push(cur->data);
+        if(cur->right) cur=cur->right;
+        else cur=cur->left;
+    }
+    while(!st.empty())
+    {
+        ans.push_back(st.top());
+        st.pop();
+    }
+}
+bool isLeaf(Node* root)
+{
+    if(root->left==NULL && root->right==NULL)
+    return true;
+    return false;
 }
     vector <int> boundary(Node *root)
     {
         //Your code here
-        vector<int>ans;
-        if(root==NULL) return ans;
-        if(!isLeaf(root)) ans.push_back(root->data);
-        leftBoundary(root,ans);
-        leafNode(root,ans);
-        rightBoundary(root,ans);
-        return ans;
+       vector<int>ans;
+       if(root==NULL) return ans;
+       if(!isLeaf(root)) ans.push_back(root->data);
+       leftBoun(root,ans);
+       leaf(root,ans);
+       rightBoun(root,ans);
+       return ans;
     }
 };
 //time complexity:-O(H)+O(H)+O(N)
