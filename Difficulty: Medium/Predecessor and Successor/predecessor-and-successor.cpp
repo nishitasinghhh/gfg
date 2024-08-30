@@ -59,21 +59,21 @@ class Solution
     }
     Node* findSuc(Node* root, int key)
     {
-        Node* suc=NULL;
-        while(root!=NULL)
-        {
-            if(root->key<=key)
-            {
-               
-                root=root->right;
-            }
-            else
-            {
-                 suc=root;
-                root=root->left;
-            }
-        }
-        return suc;
+         Node* suc=NULL;
+         Node* temp=root;
+         while(temp!=NULL)
+         {
+             if(temp->key<=key)
+             {
+                 temp=temp->right;
+             }
+             else
+             {
+                 suc=temp;
+                 temp=temp->left;
+             }
+         }
+         return suc;
     }
     void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
     {
