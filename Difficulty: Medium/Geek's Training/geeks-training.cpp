@@ -2,38 +2,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 // } Driver Code Ends
 class Solution {
   public:
-  int f(int day, int last, vector<vector<int>>& points,vector<vector<int>>&dp)
+  int f(int day, int last, vector<vector<int>> &arr, vector<vector<int>> &dp)
   {
       if(day==0)
-      {int maxi=0;
+      {
+          int maxi=0;
           for(int task=0; task<3; task++)
           {
               if(task!=last)
               {
-                  maxi=max(maxi,points[0][task]);
+                  maxi=max(maxi,arr[0][task]);
               }
           }
-                return maxi;
+          
+          return maxi;
       }
-if(dp[day][last]!=-1) return dp[day][last];
+      if(dp[day][last]!=-1) return dp[day][last];
       int maxi=0;
       for(int task=0; task<3; task++)
       {
           if(task!=last)
           {
-              int point=points[day][task]+f(day-1,task,points,dp);
+              int point=arr[day][task] + f(day-1,task,arr,dp);
               maxi=max(maxi,point);
           }
       }
-      return dp[day][last]= maxi;
+      return dp[day][last]=maxi;
   }
-    int maximumPoints(vector<vector<int>>& points, int n) {
+    int maximumPoints(vector<vector<int>>& arr, int n) {
         // Code here
         vector<vector<int>>dp(n,vector<int>(4,-1));
-        return f(n-1,3,points,dp);
+        return f(n-1,3,arr,dp);
     }
 };
 
@@ -44,7 +47,7 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        vector<vector<int>> points;
+        vector<vector<int>> arr;
         for (int i = 0; i < n; ++i) {
             vector<int> temp;
             for (int j = 0; j < 3; ++j) {
@@ -52,11 +55,11 @@ int main() {
                 cin >> x;
                 temp.push_back(x);
             }
-            points.push_back(temp);
+            arr.push_back(temp);
         }
 
         Solution obj;
-        cout << obj.maximumPoints(points, n) << endl;
+        cout << obj.maximumPoints(arr, n) << endl;
     }
     return 0;
 }
