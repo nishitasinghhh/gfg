@@ -30,6 +30,7 @@ class Solution {
         return bfs;
     }
 };
+//time co plexity:-O(N+2E)
 
 //{ Driver Code Starts.
 int main() {
