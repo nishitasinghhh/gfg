@@ -9,30 +9,22 @@ using namespace std;
 
 class Solution{   
 public:
-
+bool f(int index, vector<int> arr, int target,vector<vector<int>> &dp)
+{
+    if(target==0) return true;
+    if(index==0) return arr[0]==target;
+    if(dp[index][target]!=-1) return dp[index][target];
+    bool not_take=f(index-1,arr,target,dp);
+    bool take=false;
+    if(arr[index]<=target)
+    take=f(index-1,arr,target-arr[index],dp);
+    return dp[index][target]=take||not_take;
+}
     bool isSubsetSum(vector<int>arr, int sum){
         // code here 
         int n=arr.size();
-        vector<vector<bool>>dp(n,vector<bool>(sum+1,false));
-     for(int i=0; i<n; i++)  dp[i][0]=true;
-     if(arr[0]<=sum)
-     {
-         dp[0][arr[0]]=true;
-     }
-     for(int i=1; i<n; i++)
-     {
-         for(int target=1; target<=sum; target++ )
-         {
-             bool notTaken=dp[i-1][target];
-             bool taken=false;
-             if(arr[i]<=target)
-             {
-                 taken=dp[i-1][target-arr[i]];
-             }
-             dp[i][target]=taken||notTaken;
-         }
-     }
-     return dp[n-1][sum];
+        vector<vector<int>>dp(n,vector<int>(sum+1,-1));
+        return f(n-1,arr,sum,dp);
     }
 };
 // time complexity:-O(N*sum)
