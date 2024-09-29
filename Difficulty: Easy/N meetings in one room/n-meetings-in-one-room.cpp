@@ -4,31 +4,41 @@ using namespace std;
 
 
 // } Driver Code Ends
+
+struct data{
+   int start;
+   int end;
+   int pos;
+};
 class Solution {
   public:
+  bool static comp(data val1, data val2)
+  {
+      return val1.end<val2.end;
+  }
     // Function to find the maximum number of meetings that can
     // be performed in a meeting room.
     int maxMeetings(int n, int start[], int end[]) {
         // Your code here
-        vector<pair<int,int>>start_end(n);
+        data arr[n];
         for(int i=0; i<n; i++)
         {
-            start_end[i]={end[i],start[i]};
+            arr[i].start=start[i];
+            arr[i].end=end[i];
+            arr[i].pos=i+1;
         }
-        sort(start_end.begin(),start_end.end());
-        int count=0;
-        int st=-1;
-        for(auto it:start_end)
+        sort(arr,arr+n,comp);
+        int cnt=1;
+        int freeTime=arr[0].end;
+        for(int i=1; i<n; i++)
         {
-            int startTime=it.second;
-            int endTime=it.first;
-            if(startTime>st)
+            if(arr[i].start>freeTime)
             {
-                count++;
-                st=endTime;
+                cnt+=1;
+                freeTime=arr[i].end;
             }
         }
-        return count;
+        return cnt;
     }
 };
 
