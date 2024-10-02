@@ -3,27 +3,29 @@
 
 using namespace std;
 
-// } Driver Code Ends
-//User function template for C++
-class Solution{
-public:
 
-	// Function to find maximum product subarray
-	long long maxProduct(vector<int> arr, int n) {
-	    // code here
-	    long long prefix=1;
-	    long long suffix=1;
-	    long long ans=arr[0];
-	    for(int i=0; i<n; i++)
-	    {
-	        if(prefix==0) prefix=1;
-	        if(suffix==0) suffix=1;
-	        prefix=prefix*arr[i];
-	        suffix=suffix*arr[n-i-1];
-	        ans=max(ans,max(prefix,suffix));
-	    }
-	    return ans;
-	}
+// } Driver Code Ends
+// User function template for C++
+class Solution {
+  public:
+
+    // Function to find maximum product subarray
+    long long maxProduct(vector<int> &arr) {
+        // code here
+        long long pre=1;
+        long long suff=1;
+        long long ans=arr[0];
+        int n=arr.size();
+        for(int i=0; i<n; i++)
+        {
+            if(pre==0) pre=1;
+            if(suff==0) suff=1;
+            pre=pre*arr[i];
+            suff=suff*arr[n-i-1];
+            ans=max(ans,max(pre,suff));
+        }
+        return ans;
+    }
 };
 
 //{ Driver Code Starts.
@@ -39,7 +41,7 @@ int main() {
             cin >> arr[i];
         }
         Solution ob;
-        auto ans = ob.maxProduct(arr, n);
+        auto ans = ob.maxProduct(arr);
         cout << ans << "\n";
     }
     return 0;
