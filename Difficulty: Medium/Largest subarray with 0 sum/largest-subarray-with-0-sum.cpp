@@ -13,17 +13,16 @@ class Solution {
     int maxLen(vector<int>& arr, int n) {
         // Your code here
         unordered_map<int,int>mpp;
-        int maxi=0;
         int sum=0;
+        int maxi=0;
         for(int i=0; i<n; i++)
         {
             sum+=arr[i];
             if(sum==0)
             {
                 maxi=i+1;
-                
             }
-            else 
+            else
             {
                 if(mpp.find(sum)!=mpp.end())
                 {
@@ -38,8 +37,6 @@ class Solution {
         return maxi;
     }
 };
-// time complexity:-O(N* log(N))
-//space complexity:-O(N)
 
 
 //{ Driver Code Starts.
