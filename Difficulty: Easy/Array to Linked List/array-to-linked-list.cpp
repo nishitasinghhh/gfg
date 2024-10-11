@@ -50,14 +50,17 @@ class Solution {
   public:
     Node* constructLL(vector<int>& arr) {
         // code here
-        Node* head=new Node();
-        Node* curr=head;
-        for(auto num: arr)
+        Node* head= new Node(arr[0]);
+        Node* mover=head;
+        for(int i=1; i<arr.size(); i++)
         {
-            curr->next=new Node(num);
-            curr=curr->next;
+            Node* temp=new Node(arr[i]);
+            
+            mover->next=temp;
+            mover=mover->next;
+            
         }
-        return head->next;
+        return head;
     }
 };
 
