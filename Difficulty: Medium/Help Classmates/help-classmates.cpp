@@ -15,18 +15,17 @@ class Solution{
     { 
         // Your code goes here
         stack<int>st;
-        vector<int>marks(n);
+        vector<int>nse(n);
         for(int i=n-1; i>=0; i--)
         {
             while(!st.empty() && st.top()>=arr[i])
             {
                 st.pop();
             }
-            marks[i]=st.empty()?-1:st.top();
+            nse[i]=st.empty()?-1:st.top();
             st.push(arr[i]);
-            
         }
-        return marks;
+        return nse;
     } 
 };
 
