@@ -144,24 +144,25 @@ struct Node
 
 class Solution {
   public:
-  void helper(Node* root, vector<vector<int>> &ans, vector<int> path)
+  void findPath(Node* root, vector<vector<int>> &leafPaths, vector<int> &singlePath)
   {
-      if(root==NULL) return;
-      path.push_back(root->data);
-      if(root->right==NULL && root->left==NULL)
+      if(root==NULL)
+      return;
+      singlePath.push_back(root->data);
+      if(root->left==NULL && root->right==NULL)
       {
-          ans.push_back(path);
+          leafPaths.push_back(singlePath);
       }
-      helper(root->left, ans, path);
-      helper(root->right, ans, path);
-      path.pop_back();
+      findPath(root->left,leafPaths,singlePath);
+      findPath(root->right,leafPaths,singlePath);
+      singlePath.pop_back();
   }
     vector<vector<int>> Paths(Node* root) {
         // code here
-        vector<vector<int>>ans;
-        vector<int>path;
-        helper(root,ans,path);
-        return ans;
+        vector<vector<int>>leafPaths;
+        vector<int>singlePath;
+        findPath(root,leafPaths,singlePath);
+        return leafPaths;
     }
 };
 
