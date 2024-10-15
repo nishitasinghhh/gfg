@@ -105,7 +105,6 @@ class Solution{
     public:
     //Function to check whether all nodes of a tree have the value 
     //equal to the sum of their child nodes.
-    
     int isSumProperty(Node *root)
     {
      // Add your code here
@@ -114,7 +113,7 @@ class Solution{
      int child=0;
      if(root->left) child+=root->left->data;
      if(root->right) child+=root->right->data;
-     return(root->data==child) && isSumProperty(root->left)&& isSumProperty(root->right);
+     return (root->data==child) && isSumProperty(root->left) && isSumProperty(root->right);
     }
 };
 
