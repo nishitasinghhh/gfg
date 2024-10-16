@@ -109,12 +109,13 @@ class Solution {
   public:
     int minValue(Node* root) {
         // Code here
-          
-       //as it's a BST don't need to check for minimum element in right subtree
-        if(root!=NULL && root->left!=NULL){
-            return (minValue(root->left));
+        int mini=root->data;
+        while(root!=NULL)
+        {
+            mini=min(mini,root->data);
+            root=root->left;
         }
-        return root->data;
+        return mini;
     }
 };
 
