@@ -96,63 +96,63 @@ struct Node {
 */
 class Solution {
   public:
-  int findBurnTime(Node* root, unordered_map<Node*,Node*> &parent, Node* targetNode)
+  int findMinTime(Node* root, Node* targetNode,  unordered_map<Node*,Node*> &parent)
   {
-      unordered_map<Node*,int>vis;
+      unordered_map<Node*,bool>vis;
       queue<Node*>q;
       q.push(targetNode);
       vis[targetNode]=1;
-      int maxi=0;
+      int mini=0;
       while(!q.empty())
       {
           int size=q.size();
-          int flg=0;
+          bool flag=false;
           for(int i=0; i<size; i++)
           {
               Node* temp=q.front();
               q.pop();
               if(temp->left && !vis[temp->left])
               {
-                  flg=1;
+                  flag=1;
                   q.push(temp->left);
                   vis[temp->left]=1;
               }
               if(temp->right && !vis[temp->right])
               {
-                  flg=1;
+                  flag=1;
                   q.push(temp->right);
                   vis[temp->right]=1;
               }
               if(parent[temp] && !vis[parent[temp]])
               {
-                  flg=1;
+                  flag=1;
                   q.push(parent[temp]);
                   vis[parent[temp]]=1;
               }
           }
-          if(flg) maxi++;
+          if(flag) mini++;
       }
-      return maxi;
+      return mini;
   }
-  Node* findParent(Node* root, unordered_map<Node*,Node*> &parent, int target)
+  Node* findParent( unordered_map<Node*,Node*> &parent, Node* root, int target)
   {
-      Node* res;
       queue<Node*>q;
       q.push(root);
+      Node* res;
       while(!q.empty())
       {
-          Node* current=q.front();
-          if(current->data==target) res=current;
+          Node* node=q.front();
           q.pop();
-          if(current->left)
+          if(node->data==target) res=node;
+          if(node->left)
           {
-              parent[current->left]=current;
-              q.push(current->left);
+              parent[node->left]=node;
+              q.push(node->left);
           }
-          if(current->right)
+          if(node->right)
           {
-              parent[current->right]=current;
-              q.push(current->right);
+              parent[node->right]=node;
+              q.push(node->right);
           }
       }
       return res;
@@ -161,12 +161,12 @@ class Solution {
     {
         // Your code goes here
         unordered_map<Node*,Node*>parent;
-        Node* targetNode=findParent(root,parent,target);
-        
-        int time=findBurnTime(root,parent,targetNode);
-        return time;
+        Node* targetNode=findParent(parent,root,target);
+        int mini=findMinTime(root,targetNode,parent);
+        return mini;
     }
 };
+
 
 //{ Driver Code Starts.
 
