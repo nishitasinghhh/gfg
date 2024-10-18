@@ -9,13 +9,13 @@ class Solution {
     // Function to return the minimum cost of connecting the ropes.
     long long minCost(vector<long long>& arr) {
         // Your code here
-        priority_queue<long long, vector<long long>, greater<long long>>pq;
+        priority_queue<long long,vector<long long>,greater<long long>>pq;
+        long long n=arr.size();
+        for(int i=0; i<n; i++)
+        {
+            pq.push(arr[i]);
+        }
         long long cost=0;
-       long long n=arr.size();
-       for(long long i=0; i<n; i++)
-       {
-           pq.push(arr[i]);
-       }
         while(pq.size()>1)
         {
             long long rope=pq.top();
