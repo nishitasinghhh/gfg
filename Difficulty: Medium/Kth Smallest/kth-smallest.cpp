@@ -19,7 +19,8 @@ class Solution {
         {
             pq.push(arr[i]);
         }
-        for(int i=k; i<arr.size(); i++)
+        int n=arr.size();
+        for(int i=k; i<n; i++)
         {
             if(arr[i]<pq.top())
             {
