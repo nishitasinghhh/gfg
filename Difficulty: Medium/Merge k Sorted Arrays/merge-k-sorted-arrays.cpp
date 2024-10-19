@@ -27,7 +27,6 @@ class Solution
         {
             temp.push_back({arr[i][0],{i,0}});
         }
-        //min-heap
         priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>>pq(temp.begin(),temp.end());
         vector<int>ans;
         int i,j;
@@ -40,11 +39,11 @@ class Solution
             i=el.second.first;
             j=el.second.second;
             if(j+1<K)
-            pq.push({arr[i][j+1],{i,j+1}});
-            
+            {
+                pq.push({arr[i][j+1],{i,j+1}});
+            }
         }
         return ans;
-        
     }
 };
 
