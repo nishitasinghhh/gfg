@@ -43,21 +43,17 @@ struct Node
 class Solution {
   public:
     // Function to merge K sorted linked list.
-    // a and b ka order sahi hai?
-    //heap me ulta kaam karta hai
-    class Compare{
+    class compare{
         public:
-        bool operator()(Node*a, Node* b)
+        bool operator()(Node* a, Node* b)
         {
             return a->data>b->data;
         }
     };
     Node* mergeKLists(vector<Node*>& arr) {
         // Your code here
-        //min-heap
-        int K=arr.size();
-        priority_queue<Node*, vector<Node*>, Compare>pq;
-        for(auto node:arr)
+        priority_queue<Node*, vector<Node*>, compare>pq;
+        for(auto node: arr)
         {
             pq.push(node);
         }
@@ -71,7 +67,9 @@ class Solution {
             tail->next=temp;
             tail=tail->next;
             if(temp->next)
-            pq.push(temp->next);
+            {
+                pq.push(temp->next);
+            }
         }
         return root->next;
     }
