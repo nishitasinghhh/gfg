@@ -29,7 +29,7 @@ class Solution {
     bool searchKey(int n, struct Node* head, int key) {
         // Code here
         Node* temp=head;
-        while(temp!=NULL)
+        while(temp)
         {
             if(temp->data==key)
             return true;
@@ -63,7 +63,9 @@ int main() {
         cin >> key;
         Solution ob;
         cout << ob.searchKey(n, head, key) << endl;
-    }
+    
+cout << "~" << "\n";
+}
     return 0;
 }
 // } Driver Code Ends
