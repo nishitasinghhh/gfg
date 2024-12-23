@@ -42,7 +42,9 @@ int main() {
         Solution obj;
         long long ans = obj.solve(bt);
         cout << ans << "\n";
-    }
+    
+cout << "~" << "\n";
+}
     return 0;
 }
 // } Driver Code Ends
