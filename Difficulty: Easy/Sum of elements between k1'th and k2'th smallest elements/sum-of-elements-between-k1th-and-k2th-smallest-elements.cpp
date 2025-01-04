@@ -50,6 +50,7 @@ class Solution{
     }
 };
 
+
 //{ Driver Code Starts.
 int main()
  {
@@ -68,7 +69,9 @@ int main()
         Solution ob;
         cout << ob.sumBetweenTwoKth(a, n, k1, k2) << endl;
         
-    }
+    
+cout << "~" << "\n";
+}
 	return 0;
 }
 
