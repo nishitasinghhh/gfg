@@ -37,7 +37,9 @@ int main() {
         
         Solution ob;
         cout << ob.heapHeight(N, arr) << endl;
-    }
+    
+cout << "~" << "\n";
+}
     return 0; 
 } 
 
