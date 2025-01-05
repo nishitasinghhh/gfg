@@ -21,7 +21,9 @@ int main()
         int r;
         cin>>r;
         cout<<kthSmallest(mat,n,r)<<endl;
-    }
+    
+cout << "~" << "\n";
+}
      // cout << "7th smallest element is " << kthSmallest(mat, 4, 7);
       return 0;
 }
@@ -33,28 +35,27 @@ int main()
 int kthSmallest(int mat[MAX][MAX], int n, int k)
 {
   //Your code here
-  //create min-heap
   vector<pair<int,pair<int,int>>>temp;
   for(int i=0; i<n; i++)
   {
       temp.push_back({mat[i][0],{i,0}});
   }
   priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>>pq(temp.begin(),temp.end());
-  int ans;
+  
+  int i,j; 
   pair<int,pair<int,int>>element;
-  int i,j;
-  while(k--)
+  int num;
+  while(k-- )
   {
       element=pq.top();
       pq.pop();
-      ans=element.first;//value
-      i=element.second.first;//row
-      j=element.second.second;//col
+       num=element.first;
+      i=element.second.first;
+      j=element.second.second;
       if(j+1<n)
       {
           pq.push({mat[i][j+1],{i,j+1}});
       }
-      
   }
-  return ans;
+  return num;
 }
