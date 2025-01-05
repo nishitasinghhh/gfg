@@ -12,35 +12,38 @@ using namespace std;
 
 class Solution{
     public:
-    void heapify(vector<int> &ans, int index, int n)
+    void Heapify(vector<int> &arr,int i, int nn)
     {
-        int largest=index;
-        int left=2*index+1;
-        int right=2*index+2;
-        if(left<n && ans[left]>ans[largest])
+        int largest=i;
+        int left=2*i+1;
+        int right=2*i+2;
+        if(left<nn && arr[left]>arr[largest])
         largest=left;
-        if(right<n && ans[right]>ans[largest])
+        if(right<nn && arr[right]>arr[largest])
         largest=right;
-        if(largest!=index)
+        if(largest!=i)
         {
-            swap(ans[largest], ans[index]);
-            heapify(ans,largest,n);
+            swap(arr[largest],arr[i]);
+            Heapify(arr,largest,nn);
         }
-        
     }
     vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m) {
         // your code here
-        vector<int>ans;
+        vector<int>arr;
         for(int i=0; i<n; i++)
-        ans.push_back(a[i]);
-        for(int i=0; i<m; i++)
-        ans.push_back(b[i]);
-        int k=ans.size();
-        for(int i=k/2-1; i>=0; i--)
         {
-            heapify(ans,i,k);
+            arr.push_back(a[i]);
         }
-        return ans;
+        for(int i=0; i<m; i++)
+        {
+            arr.push_back(b[i]);
+        }
+        int nn=arr.size();
+        for(int i=nn/2-1; i>=0; i--)
+        {
+            Heapify(arr,i,nn);
+        }
+        return arr;
     }
 };
 
@@ -82,7 +85,9 @@ int main() {
         bool flag = isMerged(copyA, copyB, merged);
         if(flag == false) cout<<0<<endl;
         else cout<<1<<endl;
-    }
+    
+cout << "~" << "\n";
+}
     return 0;
 }
 
