@@ -23,14 +23,14 @@ class Solution
     {
         //code here
         vector<pair<int,pair<int,int>>>temp;
-        for(int i=0; i<K; i++)
+        for(int i=0; i<arr.size(); i++)
         {
             temp.push_back({arr[i][0],{i,0}});
         }
         priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>>pq(temp.begin(),temp.end());
         vector<int>ans;
-        int i,j;
         pair<int,pair<int,int>>el;
+        int i,j;
         while(!pq.empty())
         {
             el=pq.top();
@@ -39,9 +39,7 @@ class Solution
             i=el.second.first;
             j=el.second.second;
             if(j+1<K)
-            {
-                pq.push({arr[i][j+1],{i,j+1}});
-            }
+            pq.push({arr[i][j+1],{i,j+1}});
         }
         return ans;
     }
@@ -67,7 +65,9 @@ int main()
     	vector<int> output = obj.mergeKArrays(arr, k);
     	printArray(output, k*k);
     	cout<<endl;
-    }
+    
+cout << "~" << "\n";
+}
 	return 0;
 }
 
