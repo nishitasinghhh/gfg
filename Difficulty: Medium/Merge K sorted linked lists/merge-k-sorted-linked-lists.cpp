@@ -52,12 +52,13 @@ class Solution {
     };
     Node* mergeKLists(vector<Node*>& arr) {
         // Your code here
+        int k=arr.size();
         priority_queue<Node*, vector<Node*>, compare>pq;
-        for(auto node: arr)
+        for(auto a:arr)
         {
-            pq.push(node);
+            pq.push(a);
         }
-        Node* root=new Node(0);
+        Node* root=new Node(-1);
         Node* tail=root;
         Node* temp;
         while(!pq.empty())
