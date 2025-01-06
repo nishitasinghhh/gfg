@@ -6,24 +6,23 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  int f(int index, vector<int> &height,vector<int> &dp)
+  int findMinE(vector<int> &heights, int index, vector<int> &dp)
   {
       if(index==0) return 0;
       if(dp[index]!=-1) return dp[index];
-      int left=f(index-1,height,dp)+abs(height[index]-height[index-1]);
-      int right=INT_MAX;
-      if(index>1)
-      right=f(index-2, height,dp) +abs(height[index]-height[index-2]);
+    int left=findMinE(heights, index-1,dp)+abs(heights[index]-heights[index-1]);
+    int right=INT_MAX;
+    if(index>1)
+     right=findMinE(heights,index-2,dp)+abs(heights[index]-heights[index-2]);
+      
       return dp[index]=min(left,right);
   }
-    int minimumEnergy(vector<int>& height, int n) {
+    int minimumEnergy(vector<int>& heights, int n) {
         // Code here
-       vector<int>dp(n+1,-1);
- return f(n-1,height,dp);
+        vector<int>dp(n+1,-1);
+        return findMinE(heights,n-1,dp);
     }
 };
-//time complexity:-O(N)
-//space complexity:-O(1) array 
 
 //{ Driver Code Starts.
 
@@ -39,7 +38,9 @@ int main() {
         }
         Solution obj;
         cout << obj.minimumEnergy(arr, N) << "\n";
-    }
+    
+cout << "~" << "\n";
+}
     return 0;
 }
 // } Driver Code Ends
