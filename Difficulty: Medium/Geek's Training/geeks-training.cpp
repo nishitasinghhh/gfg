@@ -6,39 +6,38 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  int f(int day, int last, vector<vector<int>> &arr, vector<vector<int>> &dp)
+  int f(int day, int last, vector<vector<int>>& points,vector<vector<int>>&dp)
   {
       if(day==0)
-      {
-          int maxi=0;
+      {int maxi=0;
           for(int task=0; task<3; task++)
           {
               if(task!=last)
               {
-                  maxi=max(maxi,arr[0][task]);
+                  maxi=max(maxi,points[0][task]);
               }
           }
-          
-          return maxi;
+                return maxi;
       }
-      if(dp[day][last]!=-1) return dp[day][last];
+if(dp[day][last]!=-1) return dp[day][last];
       int maxi=0;
       for(int task=0; task<3; task++)
       {
           if(task!=last)
           {
-              int point=arr[day][task] + f(day-1,task,arr,dp);
+              int point=points[day][task]+f(day-1,task,points,dp);
               maxi=max(maxi,point);
           }
       }
-      return dp[day][last]=maxi;
+      return dp[day][last]= maxi;
   }
-    int maximumPoints(vector<vector<int>>& arr, int n) {
+    int maximumPoints(vector<vector<int>>& points, int n) {
         // Code here
         vector<vector<int>>dp(n,vector<int>(4,-1));
-        return f(n-1,3,arr,dp);
+        return f(n-1,3,points,dp);
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
@@ -60,6 +59,7 @@ int main() {
 
         Solution obj;
         cout << obj.maximumPoints(arr, n) << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
