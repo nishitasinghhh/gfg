@@ -8,29 +8,27 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 
-class Solution{
+class Solution {
   public:
-  int findMax(int index,int N, int price[],vector<vector<int>> &dp)
+  int findPrice(int index, int N,vector<int> &price,vector<vector<int>>&dp)
   {
       if(index==0)
-      {
-          return (N*price[0]);
-      }
+      return price[0]*N;
       if(dp[index][N]!=-1) return dp[index][N];
-      int notTake=0+findMax(index-1,N, price, dp);
+      int notTake=findPrice(index-1, N, price,dp);
       int take=INT_MIN;
-      int rodlength=index+1;
-      if(rodlength<=N)
+      int rodLength=index+1;
+      if(rodLength<=N)
       {
-          take=price[index]+findMax(index,N-rodlength,price,dp);
+          take=price[index]+findPrice(index, N-rodLength, price,dp);
       }
-      return dp[index][N]=max(take,notTake);
+      return dp[index][N]= max(take,notTake);
   }
-    int cutRod(int price[], int n) {
-        //code here
-    
+    int cutRod(vector<int> &price) {
+        // code here
+        int n=price.size();
         vector<vector<int>>dp(n,vector<int>(n+1,-1));
-        return findMax(n-1, n, price,dp);
+        return findPrice(n-1, n,price,dp);
     }
 };
 
@@ -38,17 +36,22 @@ class Solution{
 
 int main() {
     int t;
-    cin >> t;
+    scanf("%d ", &t);
     while (t--) {
-        int n;
-        cin >> n;
-        int a[n];
-        for (int i = 0; i < n; i++) 
-            cin >> a[i];
-            
+
+        vector<int> a;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            a.push_back(number);
+        }
+
         Solution ob;
 
-        cout << ob.cutRod(a, n) << endl;
+        cout << ob.cutRod(a) << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
