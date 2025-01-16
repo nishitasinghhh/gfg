@@ -1,55 +1,51 @@
 //{ Driver Code Starts
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 
 // } Driver Code Ends
 
-class Solution
-{
-    public:
-    //Function to check if brackets are balanced or not.
-    bool ispar(string x)
-    {
-        // Your code here
+class Solution {
+  public:
+    bool isParenthesisBalanced(string& s) {
+        // code here
+        int n=s.size();
         stack<char>st;
-        for(int i=0; i<x.size(); i++)
+        for(int i=0; i<n; i++)
         {
-            if(x[i]=='(' || x[i]=='{' || x[i]=='[')
+            if(s[i]=='[' || s[i]=='{' || s[i]=='(')
             {
-                st.push(x[i]);
+                st.push(s[i]);
             }
             else
             {
-                if(st.empty()) return 0;
+                if(st.empty()) return false;
                 char ch=st.top();
-                if((x[i]==')' && ch!='(') ||(x[i]=='}' && ch!='{') ||(x[i]==']' && ch!='[') )
-                {
-                    return false;
-                }
                 st.pop();
+                if((s[i]==']' && ch!='[') || (s[i]=='}' && ch!='{') || (s[i]==')' && ch!='('))
+                return false;
             }
         }
         return st.empty();
     }
-
 };
 
 //{ Driver Code Starts.
 
-int main()
-{
-   int t;
-   string a;
-   cin>>t;
-   while(t--)
-   {
-       cin>>a;
-       Solution obj;
-       if(obj.ispar(a))
-        cout<<"balanced"<<endl;
-       else
-        cout<<"not balanced"<<endl;
-   }
+int main() {
+    int t;
+    string a;
+    cin >> t;
+    while (t--) {
+        cin >> a;
+        Solution obj;
+        if (obj.isParenthesisBalanced(a))
+            cout << "true" << endl;
+        else
+            cout << "false" << endl;
+
+        cout << "~"
+             << "\n";
+    }
 }
 // } Driver Code Ends
