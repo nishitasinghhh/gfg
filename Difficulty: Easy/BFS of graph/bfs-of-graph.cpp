@@ -11,10 +11,10 @@ class Solution {
         // Code here
         int v=adj.size();
         int vis[v]={0};
-        vis[0]=1;
         queue<int>q;
+        vis[0]=1;
         q.push(0);
-        vector<int>bfs;
+        vector<int>bfs(0);
         while(!q.empty())
         {
             int node=q.front();
@@ -49,7 +49,7 @@ int main() {
             int u, v;
             cin >> u >> v;
             adj[u].push_back(v);
-            adj[v].push_back(u);
+            adj[v].push_back(u); // For undirected graph, add both u->v and v->u
         }
 
         Solution obj;
