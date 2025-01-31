@@ -4,11 +4,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 // } Driver Code Ends
 // User function Template for C++
 class Solution {
   public:
-  void toposort(int node,int vis[],vector<pair<int,int>>adj[],stack<int>&st)
+  void dfs(int node,vector<pair<int,int>>adj[], int vis[], stack<int>&st)
   {
       vis[node]=1;
       for(auto it:adj[node])
@@ -16,62 +17,57 @@ class Solution {
           int v=it.first;
           if(!vis[v])
           {
-              toposort(v,vis,adj,st);
+              dfs(v,adj,vis,st);
           }
       }
       st.push(node);
+      
   }
-     vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
-        // code here
-        vector<pair<int,int>>adj[N];
-        for(int i=0; i<M; i++)
+    vector<int> shortestPath(int V, int E, vector<vector<int>>& edges) {
+        // code here 
+        vector<pair<int,int>>adj[V];
+        for(int i=0; i<E; i++)
         {
             int u=edges[i][0];
             int v=edges[i][1];
             int wt=edges[i][2];
             adj[u].push_back({v,wt});
         }
-        int vis[N]={0};
+        int vis[V]={0};
         stack<int>st;
-        //N+E
-        for(int i=0; i<N; i++)
+        for(int i=0; i<V; i++)
         {
             if(!vis[i])
             {
-                toposort(i,vis,adj,st);
+                dfs(i,adj,vis,st);
             }
         }
-       vector<int>dist(N);
-        
-        for(int i=0; i<N; i++) dist[i]=1e9;
+        vector<int>dist(V,1e9);
         dist[0]=0;
-        //(N+M)
         while(!st.empty())
         {
             int node=st.top();
             st.pop();
-            for(auto it: adj[node])
+            for(auto it:adj[node])
             {
                 int v=it.first;
-                int wt=it.second;
-                if(dist[node]+wt<dist[v])
+                int w=it.second;
+                if(dist[node]+w<dist[v])
                 {
-                    dist[v]=dist[node]+wt;
+                    dist[v]=dist[node]+w;
                 }
             }
         }
-        vector<int>ans(N,-1);
-        for(int i=0; i<N; i++)
+        vector<int>ans(V,-1);
+        for(int i=0; i<V; i++)
         {
             if(dist[i]!=1e9)
-            {
-                ans[i]=dist[i];
-            }
+            ans[i]=dist[i];
         }
         return ans;
+        
     }
 };
-
 
 
 //{ Driver Code Starts.
@@ -82,10 +78,11 @@ int main() {
         int n, m;
         cin >> n >> m;
         vector<vector<int>> edges;
-        for(int i=0; i<m; ++i){
+        for (int i = 0; i < m; ++i) {
             vector<int> temp;
-            for(int j=0; j<3; ++j){
-                int x; cin>>x;
+            for (int j = 0; j < 3; ++j) {
+                int x;
+                cin >> x;
                 temp.push_back(x);
             }
             edges.push_back(temp);
@@ -96,6 +93,9 @@ int main() {
             cout << x << " ";
         }
         cout << "\n";
+
+        cout << "~"
+             << "\n";
     }
 }
 
