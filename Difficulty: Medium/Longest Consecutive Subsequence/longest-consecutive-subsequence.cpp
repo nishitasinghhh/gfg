@@ -1,10 +1,3 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-
-using namespace std;
-
-
-// } Driver Code Ends
 class Solution {
   public:
 
@@ -18,7 +11,7 @@ class Solution {
             st.insert(arr[i]);
         }
         int cnt=1;
-        int maxCnt=INT_MIN;
+        int maxCount=INT_MIN;
         for(auto it:st)
         {
             if(st.find(it-1)==st.end())
@@ -30,36 +23,9 @@ class Solution {
                     x=x+1;
                     cnt++;
                 }
-                maxCnt=max(maxCnt,cnt);
+                maxCount=max(maxCount,cnt);
             }
         }
-        return maxCnt;
+        return maxCount;
     }
 };
-
-//{ Driver Code Starts.
-int main() {
-    int t;
-    cin >> t;
-    cin.ignore();
-    while (t--) {
-        vector<int> arr;
-        string input;
-
-        // Read first array
-        getline(cin, input);
-        stringstream ss(input);
-        int number;
-        while (ss >> number) {
-            arr.push_back(number);
-        }
-
-        Solution ob;
-        int res = ob.longestConsecutive(arr);
-
-        cout << res << endl << "~" << endl;
-    }
-    return 0;
-}
-
-// } Driver Code Ends
