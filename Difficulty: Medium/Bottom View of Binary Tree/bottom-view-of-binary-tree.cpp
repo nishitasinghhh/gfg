@@ -11,7 +11,7 @@ class Solution {
   public:
     vector<int> bottomView(Node *root) {
         // Your Code Here
-        vector<int>ans;
+         vector<int>ans;
         if(root==NULL)
         return ans;
         map<int,int>mpp;
@@ -23,6 +23,7 @@ class Solution {
             q.pop();
             Node* node=it.first;
             int line=it.second;
+           
             mpp[line]=node->data;
             if(node->left)
             q.push({node->left,line-1});
